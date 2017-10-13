@@ -1,15 +1,64 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 #include <iostream>
+#include <fstream>
 using namespace sf;
+const int width = 68, height = 35,blockSize=20;//êàðòà
 
 class Map 
 {	public:
-
-	Map(std::string name) 
-	{}
-	void GetMapfromFile(String name)
-	{}
+	char map[width*height * 4];
+	/*void DisplayMap()
+	{
+		for (int j = 0; j < height; j++)
+		{
+			for (int i = 0; i < width; i++)
+				if (map[i + j*width] == '1')
+				{
+					static sf::RectangleShape circle(sf::Vector2f(blockSize, blockSize));
+					circle.setPosition(sf::Vector2f(i*blockSize, j*blockSize));
+					window.draw(circle);
+				}
+		}
+	}*/
+	/*char* getArray ()
+	{
+		return map;   !!!!!!!!!!!!!!!!!!!!!!!!ÊÀÊ ÑÄÅËÀÒÜ ÏÅÐÅÄÀ×Ó ññûëêó ÍÀ ÌÀÑÑÈÂ ? È\ÈËÈ ÍÎÐÌÀËÜÍÛÉ ÎÏÅÐÀÒÎÐ []
+	}
+	char* Array ()
+	{
+		return map;
+	}*/
+	char GetElement(int index)
+	{
+		return map[index];
+	}
+	void SetElement(int index, char value)
+	{
+		map[index] = value;
+	}// ÝÒÎÒ ÎÒÑÒÎÉ ÓÁÐÀÒÜ È ÑÄÅËÀÒÜ ÍÎÐÌÀËÜÍÅ ÎÁÐÀÙÅÍÈÅ
+	Map(std::string name= "MAP.txt")
+	{
+		GetMapfromFile(name);
+	}
+	void GetMapfromFile(std::string name="MAP.txt")
+	{
+		std::ifstream map1;		
+		map1.open(name);
+		/*char input[width*height * 4];*/
+		std::string newelement;
+		int j = 0;
+		while (!map1.eof())
+		{
+			map1 >> newelement;
+			for (int i = 0; i < width; i++)
+				map[i + j*width] = newelement[i];
+			j++;
+		}
+		map1.close();
+	}
+	/*bool IsBlock()
+	{}*/
 };
 
 class Unit
@@ -30,6 +79,7 @@ public:
 };
 void main() 
 {
+	Map *zap= new Map();
 	float speed = 0.05;
 	int delay =300;
 	sf::RenderWindow	 window(sf::VideoMode(800, 600), "SFML works!");
@@ -70,6 +120,18 @@ void main()
 			unit.unitSprite.setPosition(unit.unitSprite.getPosition().x , unit.unitSprite.getPosition().y+time*speed);
 		window.clear();
 		std::cout <<unit.unitSprite.getPosition().x<<"     ";
+		
+		
+		for (int j = 0; j < height; j++)
+		{
+			for (int i = 0; i < width; i++)
+				if ( zap->GetElement(i + j*width)== '1')
+				{
+					static sf::RectangleShape circle(sf::Vector2f(blockSize, blockSize));
+					circle.setPosition(sf::Vector2f(i*blockSize, j*blockSize));
+					window.draw(circle);
+				}
+		}
 		window.draw(unit.unitSprite);
 		window.display();
 	}
