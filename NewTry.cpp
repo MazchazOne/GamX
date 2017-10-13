@@ -57,6 +57,22 @@ class Map
 		}
 		map1.close();
 	}
+	void test(sf::Sprite* qwe)
+	{
+		sf::Texture texture;
+		texture.loadFromFile("images/sqad.png");
+
+		for (int j = 0; j < height; j++)
+			for (int i = 0; i < width; i++)
+			{
+				if (map[i + j*width] == 1)
+				{
+					qwe[i + j*width].setTexture(texture);//тайл какойнить
+					qwe[i + j*width].setPosition(i*blockSize, j*blockSize);
+				}
+				
+			}
+	}
 	/*bool IsBlock()
 	{}*/
 };
@@ -78,11 +94,18 @@ public:
 
 };
 void main() 
-{
+{	//////////test sozdat' mapy texturkoy dlya oobrabotki colizii
+
+	sf::Sprite test[width*height * 4];
+
+	//////
 	Map *zap= new Map();
+
+	zap->test(test);
+
 	float speed = 0.05;
 	int delay =300;
-	sf::RenderWindow	 window(sf::VideoMode(800, 600), "SFML works!");
+	sf::RenderWindow	 window(sf::VideoMode(width*blockSize, height*blockSize), "SFML works!");
 	//sf::CircleShape octagon(80, 8);
 	sf::CircleShape octagon(50);
 	//octagon.setPosition(20, 20);
@@ -100,16 +123,7 @@ void main()
 			if (event.type == sf::Event::Closed)
 				window.close();
 		}
-		/*if (Keyboard::isKeyPressed(Keyboard::Right))
-			octagon.setPosition(octagon.getPosition().x+ time*speed, octagon.getPosition().y);
-		if (Keyboard::isKeyPressed(Keyboard::Left))
-			octagon.setPosition(octagon.getPosition().x - time*speed, octagon.getPosition().y);
-		if (Keyboard::isKeyPressed(Keyboard::Up))
-			octagon.setPosition(octagon.getPosition().x , octagon.getPosition().y- time*speed);
-		if (Keyboard::isKeyPressed(Keyboard::Down))
-			octagon.setPosition(octagon.getPosition().x, octagon.getPosition().y + time*speed);
-*/
-
+		
 		if (Keyboard::isKeyPressed(Keyboard::Right))
 			unit.unitSprite.setPosition(unit.unitSprite.getPosition().x + time*speed, unit.unitSprite.getPosition().y);
 		if (Keyboard::isKeyPressed(Keyboard::Left))
@@ -125,12 +139,17 @@ void main()
 		for (int j = 0; j < height; j++)
 		{
 			for (int i = 0; i < width; i++)
-				if ( zap->GetElement(i + j*width)== '1')
+				window.draw(test[i + j*width]);
+				/*if ( zap->GetElement(i + j*width)== '1')
 				{
 					static sf::RectangleShape circle(sf::Vector2f(blockSize, blockSize));
 					circle.setPosition(sf::Vector2f(i*blockSize, j*blockSize));
+
+
+
+
 					window.draw(circle);
-				}
+				}*/
 		}
 		window.draw(unit.unitSprite);
 		window.display();
