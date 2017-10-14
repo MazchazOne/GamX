@@ -3,10 +3,10 @@
 #include <iostream>
 #include <fstream>
 using namespace sf;
-const int width = 68, height = 35,blockSize=20;//карта
-const char blockChar = '1'; char nothingChar = '0';
+const int width = 68, height = 35,blockSize=20;//Map
+const char blockChar = '1'; char nothingChar = '0';//designations for map
 
-class Path
+class Path //PAtch handler // graphs coming soon
 {public:
 	static void ChangedCoordForNextStep(float*x, float* y, sf::FloatRect currentCoordIn, sf::FloatRect targetCoord)
 	{
@@ -53,7 +53,7 @@ class Path
 			
 	}
 };
-class Map 
+class Map // NEED RECREATE THIS CLASS
 {	public:
 	char map[width*height * 4];
 	/*void DisplayMap()
@@ -138,7 +138,7 @@ public:
 	float currentFrame;
 	float Dx = 0, Dy=0;//set get 
 
-	Unit(std::string pathForTexture)//?
+	Unit(std::string pathForTexture)
 	{
 		unitImage.loadFromFile(pathForTexture);
 		unitTexture.loadFromImage(unitImage);
@@ -147,24 +147,23 @@ public:
 		ActualPositionRect=sf::FloatRect(0, 0, 40, 40);
 		FolowingTarget = false;
 	}
-	void SetTarget(int x,int y) 
+	void SetTarget(int x,int y) //Target for movement
 	{
 		TargetPositionPoint = sf::FloatRect(x, y, 1, 1);//zadat' netochnost'
 		FolowingTarget = true;
 	}
 	void Step(float time,char* map) 
 	{
-		Path::ChangedCoordForNextStep(&Dx, &Dy, ActualPositionRect, TargetPositionPoint);
-		//unitSprite.setPosition(unitSprite.getPosition().x + time*Dx,unitSprite.getPosition().y+Dy);	
-		if (ActualPositionRect.intersects(TargetPositionPoint))
+		Path::ChangedCoordForNextStep(&Dx, &Dy, ActualPositionRect, TargetPositionPoint);	//handler for all path and create current chaging coord
+		if (ActualPositionRect.intersects(TargetPositionPoint))		
 			FolowingTarget = false;
-		if (FolowingTarget == true)
+		if (FolowingTarget == true)				//if unit out from target zone // start movement
 		{
-			ActualPositionRect.top += time*Dy;
-			CollisionOnY(map);
-			ActualPositionRect.left += time*Dx;
-			CollisionOnX(map);//time?;
-			unitSprite.setPosition(ActualPositionRect.left, ActualPositionRect.top);
+			ActualPositionRect.top += time*Dy;	//move	y	
+			CollisionOnY(map);					//collision y handler
+			ActualPositionRect.left += time*Dx;//move x
+			CollisionOnX(map);//time?;			//colision x handler
+			unitSprite.setPosition(ActualPositionRect.left, ActualPositionRect.top);//new coordinate for unit's sprite
 			Dx = 0; Dy = 0;			
 		}
 	}
@@ -209,80 +208,48 @@ public:
 };
 
 void main() 
-{	//////////test sozdat' mapy texturkoy dlya oobrabotki colizii
-
-	//sf::Sprite test[width*height * 4];
-
-	//////
-	Map *zap= new Map();
-
-	//zap->test(test);
-
-	float speed = 0.05;
-	int delay =300;
-	sf::RenderWindow	 window(sf::VideoMode(width*blockSize, height*blockSize), "SFML works!");
-	//sf::CircleShape octagon(80, 8);
-	sf::CircleShape octagon(50);
-	//octagon.setPosition(20, 20);
-	Clock clock;
-	Unit unit("images/hero.png");
-
-	while (window.isOpen())
+{
+	Map *zap = new Map();												//create map
+	int delay =300;														//time delay for next step
+	sf::RenderWindow window(sf::VideoMode(width*blockSize, height*blockSize), "SFML works!");//create window
+	Clock clock;														
+	Unit unit("images/hero.png");										//create mainPerson
+	while (window.isOpen())										//Game loop/main loop
 	{
 		float time = clock.getElapsedTime().asMicroseconds();
-		time = time/delay;
+		time = time/delay;										//get time for other func
 		clock.restart();
-		sf::Event event;
-		while (window.pollEvent(event))
+		sf::Event event;										
+		while (window.pollEvent(event))							//event handler
 		{
 			if (event.type == sf::Event::Closed)
 				window.close();
 		}
-		if (event.type == sf::Event::MouseButtonPressed&&event.mouseButton.button == sf::Mouse::Right/*&&timerForLeftMouseButton<=0*/)
+		if (event.type == sf::Event::MouseButtonPressed&&event.mouseButton.button == sf::Mouse::Right)//let coordinateRight click to curret unit
 		{
 			int x = sf::Mouse::getPosition().x - window.getPosition().x - 7;
 			int y = sf::Mouse::getPosition().y - window.getPosition().y - 31;
-			unit.SetTarget(x, y);
-			/*std::cout << sf::Mouse::getPosition().x-window.getPosition().x-7<<"   "<< sf::Mouse::getPosition().y-window.getPosition().y-31<<endl;
-			cout << x / blockSize + width*y / blockSize<<"="<<x/blockSize<< width*(y / blockSize);*/
-			
-			//timerForLeftMouseButton = 20;
-		}
-		
-		/*if (Keyboard::isKeyPressed(Keyboard::Right))
-			unit.Dx = speed;
-		if (Keyboard::isKeyPressed(Keyboard::Left))
-			unit.Dx = -speed;
-		if (Keyboard::isKeyPressed(Keyboard::Up))
-			unit.Dy = -speed;
-		if (Keyboard::isKeyPressed(Keyboard::Down))
-			unit.Dy = speed;*/
-		unit.Step(time,zap->map);
-		window.clear();
-		//std::cout << ;
-		
-		
+			unit.SetTarget(x, y);	
+		}			
+		unit.Step(time,zap->map);					//where array with all units...they will do their step /// now just 1 unit
+		window.clear();		
+		/////////DRAW MAP////////
 		for (int j = 0; j < height; j++)
 		{
-			for (int i = 0; i < width; i++)
-				/*window.draw(test[i + j*width]);*/
+			for (int i = 0; i < width; i++)				
 				if ( zap->GetElement(i + j*width)== '1')
 				{
-					static sf::RectangleShape circle(sf::Vector2f(blockSize, blockSize));
-					circle.setPosition(sf::Vector2f(i*blockSize, j*blockSize));
-
-
-					window.draw(circle);
+					static sf::RectangleShape Rectangle(sf::Vector2f(blockSize, blockSize));
+					Rectangle.setPosition(sf::Vector2f(i*blockSize, j*blockSize));
+					window.draw(Rectangle);
 				}
 		}
-		window.draw(unit.unitSprite);
-		/*static sf::RectangleShape circle(sf::Vector2f(40, 40));
-		circle.setPosition(sf::Vector2f(unit.ActualPositionRect.left, unit.ActualPositionRect.top));
-		window.draw(circle);*/
-		static sf::RectangleShape circle1(sf::Vector2f(2, 2));
-		circle1.setPosition(sf::Vector2f(unit.TargetPositionPoint.left, unit.TargetPositionPoint.top));
-		circle1.setFillColor(sf::Color::Red);
-		window.draw(circle1);
+		///////////////////////
+		window.draw(unit.unitSprite);// will draw all units from array.. now just 1 		
+		static sf::RectangleShape circle1(sf::Vector2f(2, 2));											//
+		circle1.setPosition(sf::Vector2f(unit.TargetPositionPoint.left, unit.TargetPositionPoint.top));	// draw current unit's target as red circle
+		circle1.setFillColor(sf::Color::Red);															//
+		window.draw(circle1);						
 		window.display();
 	}
 
