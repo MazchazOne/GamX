@@ -206,7 +206,6 @@ public:
 			}
 	}
 };
-
 void main() 
 {
 	Map *zap = new Map();												//create map
@@ -225,13 +224,13 @@ void main()
 			if (event.type == sf::Event::Closed)
 				window.close();
 		}
-		if (event.type == sf::Event::MouseButtonPressed&&event.mouseButton.button == sf::Mouse::Right)//let coordinateRight click to curret unit
+		if (event.type == sf::Event::MouseButtonPressed&&event.mouseButton.button == sf::Mouse::Right)//let coordinateRight click to current unit
 		{
 			int x = sf::Mouse::getPosition().x - window.getPosition().x - 7;
 			int y = sf::Mouse::getPosition().y - window.getPosition().y - 31;
 			unit.SetTarget(x, y);	
 		}			
-		unit.Step(time,zap->map);					//where array with all units...they will do their step /// now just 1 unit
+		unit.Step(time,zap->map);					//here array with all units...they will do their step /// now just 1 unit
 		window.clear();		
 		/////////DRAW MAP////////
 		for (int j = 0; j < height; j++)
