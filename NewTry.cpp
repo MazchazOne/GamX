@@ -4,6 +4,7 @@
 #include <fstream>
 using namespace sf;
 const int width = 68, height = 35,blockSize=20;//карта
+const char blockChar = '1'; char nothingChar = '0';
 
 class Map 
 {	public:
@@ -98,25 +99,21 @@ public:
 	}
 	void Step(float time,char* map) 
 	{	
-
-
-
-		//unitSprite.setPosition(unitSprite.getPosition().x + time*Dx,unitSprite.getPosition().y+Dy);
-		PhisicRect.left += time*Dx;
-		Collision(map);
-
-		PhisicRect.top += time*Dy;		
-		Collision(map);//time?;
+		//unitSprite.setPosition(unitSprite.getPosition().x + time*Dx,unitSprite.getPosition().y+Dy);		
+		PhisicRect.top += time*Dy;
+		CollisionOnY(map);		
+		PhisicRect.left += time*Dx;		
+		CollisionOnX(map);//time?;
 		unitSprite.setPosition(PhisicRect.left, PhisicRect.top);
 		Dx = 0; Dy = 0;
 	}
-	void Collision(char* map)
+	void CollisionOnY(char* map)
 	{
 
 		for (int j = PhisicRect.top / blockSize; j<(PhisicRect.top + PhisicRect.height) / blockSize; j++)
 			for (int i = PhisicRect.left / blockSize; i<(PhisicRect.left + PhisicRect.width) / blockSize; i++)
 			{
-				if (map[i+width*j] == '0') 
+				if (map[i+width*j] == blockChar)
 				{
 					if (Dy>0)
 					{
@@ -125,20 +122,30 @@ public:
 					else if (Dy<0)
 					{
 						PhisicRect.top = j*blockSize+ blockSize;   Dy = 0;
-					}
-					else if (Dx>0 )
-					{
-						PhisicRect.left = i * blockSize-PhisicRect.width;Dx=0;
-					}
-					else if (Dx<0 )
-					{
-						PhisicRect.left = i * blockSize+blockSize;Dx=0;
-					}
+					}					
 				}				
 			}
-
 	}
 
+	void CollisionOnX(char* map)
+	{
+
+		for (int j = PhisicRect.top / blockSize; j<(PhisicRect.top + PhisicRect.height) / blockSize; j++)
+			for (int i = PhisicRect.left / blockSize; i<(PhisicRect.left + PhisicRect.width) / blockSize; i++)
+			{
+				if (map[i + width*j] == blockChar)
+				{				
+					if (Dx>0)
+					{
+						PhisicRect.left = i * blockSize - PhisicRect.width; Dx = 0;
+					}
+					else if (Dx<0)
+					{
+						PhisicRect.left = i * blockSize + blockSize; Dx = 0;
+					}
+				}
+			}
+	}
 };
 void main() 
 {	//////////test sozdat' mapy texturkoy dlya oobrabotki colizii
