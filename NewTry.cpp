@@ -8,6 +8,66 @@ const char blockChar = '1'; char nothingChar = '0';//designations for map
 
 class Path //PAtch handler // graphs coming soon
 {public:
+	const int maxPotential = 1000;
+	const int minPotential = -500;
+	const int aroundMin = -250;
+	int PMap[height*width*4];
+	int priorityDifferenceFromTarget=5;
+
+	//ѕќƒ”ћј“№ Ќјƒ ј–√”ћ≈Ќ“јћ» и конструктором » ”Ѕ–ј“№ „ј—“№ переменных из класса 
+	int fortest=0;
+	bool passedPoints[height*width * 4];	
+	sf::Vector2<int> targetPosition= Vector2<int>(372/blockSize,319/blockSize);///// координаты таргета 
+	void qwe(sf::Vector2<int> point, int potentialForCurrentPoint)////рекурсивный метод дл€ заполнени€ положительным приоритетом
+	{fortest++;
+		if (PMap[point.x + point.y*width] >= potentialForCurrentPoint)
+			return;
+		if (PMap[point.x + point.y*width] == minPotential)
+			return;
+		PMap[point.x + point.y*width] = potentialForCurrentPoint;//что-то нужно с этим делать по идее должно быть +=
+		/*passedPoints[point.x + point.y*width] = true;
+		passedPoints[point.x + (point.y - 1)*width] = true;
+		passedPoints[point.x + (point.y +1)*width] = true;
+		passedPoints[point.x +1+ (point.y )*width] = true;
+		passedPoints[point.x -1+ (point.y )*width] = true;
+		*/
+		if (point.x == 0||point.x==width-1||point.y==0||point.y==height-1)
+			return;
+		qwe(sf::Vector2<int>(point.x-1, point.y), potentialForCurrentPoint - priorityDifferenceFromTarget);
+		qwe(sf::Vector2<int>(point.x+1, point.y), potentialForCurrentPoint - priorityDifferenceFromTarget);
+		qwe(sf::Vector2<int>(point.x, point.y-1), potentialForCurrentPoint - priorityDifferenceFromTarget);
+		qwe(sf::Vector2<int>(point.x, point.y+1), potentialForCurrentPoint - priorityDifferenceFromTarget);
+
+	}
+	void InitPMap(char map[width*height*4]) 
+	{////////assign 0 for each element from potential array 
+		for (int j = 0; j < height; j++)
+			for (int i = 0; i < width; i++)
+				PMap[i + j*width] = 0;
+		////////////
+
+		////////////////////////assign negative potential
+		for(int j=1;j<height;j++)
+			for (int i = 1; i < width; i++)
+			{
+				if (map[i + width*j] == blockChar)
+				{
+					PMap[i + width*j] = minPotential;
+					if (PMap[i + width*j + 1] == 0)
+						PMap[i + width*j + 1] = aroundMin;
+					if (PMap[i + width*j - 1] == 0)
+						PMap[i + width*j - 1] = aroundMin;
+					if (PMap[i + width*(j + 1)] == 0)
+						PMap[i + width*(j + 1)] = aroundMin;
+					if (PMap[i + width*(j - 1)] == 0)
+						PMap[i + width*(j - 1)] = aroundMin;
+				}
+			}
+		////////////////////////assign positive potential for target and block around target
+		//PMap[targetPosition.x+width*targetPosition.y] = maxPotential;
+		qwe(targetPosition, maxPotential);
+		////////////////////////
+	}
 	static void ChangedCoordForNextStep(float*x, float* y, sf::FloatRect currentCoordIn, sf::FloatRect targetCoord)
 	{
 		sf::FloatRect currentCoord(currentCoordIn);
@@ -154,11 +214,12 @@ public:
 	}
 	void Step(float time,char* map) 
 	{
-		Path::ChangedCoordForNextStep(&Dx, &Dy, ActualPositionRect, TargetPositionPoint);	//handler for all path and create current chaging coord
+			//handler for all path and create current chaging coord
 		if (ActualPositionRect.intersects(TargetPositionPoint))		
-			FolowingTarget = false;
+			FolowingTarget = true;
 		if (FolowingTarget == true)				//if unit out from target zone // start movement
 		{
+			Path::ChangedCoordForNextStep(&Dx, &Dy, ActualPositionRect, TargetPositionPoint);
 			ActualPositionRect.top += time*Dy;	//move	y	
 			CollisionOnY(map);					//collision y handler
 			ActualPositionRect.left += time*Dx;//move x
@@ -208,7 +269,16 @@ public:
 };
 void main() 
 {
-	Map *zap = new Map();												//create map
+	
+	Map *zap = new Map();	//create map
+	////////TEST PATH
+	Path pathTest;	
+	pathTest.InitPMap(zap->map);
+	
+	std::cout << pathTest.fortest;
+	////////TEST PATH
+
+
 	int delay =300;														//time delay for next step
 	sf::RenderWindow window(sf::VideoMode(width*blockSize, height*blockSize), "SFML works!");//create window
 	Clock clock;														
@@ -224,32 +294,55 @@ void main()
 			if (event.type == sf::Event::Closed)
 				window.close();
 		}
-		if (event.type == sf::Event::MouseButtonPressed&&event.mouseButton.button == sf::Mouse::Right)//let coordinateRight click to current unit
-		{
-			int x = sf::Mouse::getPosition().x - window.getPosition().x - 7;
-			int y = sf::Mouse::getPosition().y - window.getPosition().y - 31;
-			unit.SetTarget(x, y);	
-		}			
-		unit.Step(time,zap->map);					//here array with all units...they will do their step /// now just 1 unit
-		window.clear();		
-		/////////DRAW MAP////////
+		//if (event.type == sf::Event::MouseButtonPressed&&event.mouseButton.button == sf::Mouse::Right)//let coordinateRight click to current unit
+		//{
+		//	int x = sf::Mouse::getPosition().x - window.getPosition().x - 7;
+		//	int y = sf::Mouse::getPosition().y - window.getPosition().y - 31;
+		//	unit.SetTarget(x, y);	
+		//}			
+		//unit.Step(time,zap->map);					//here array with all units...they will do their step /// now just 1 unit
+		//window.clear();		
+		///////////DRAW MAP//////// затоклнуть в метод карты...
+		//for (int j = 0; j < height; j++)
+		//{
+		//	for (int i = 0; i < width; i++)				
+		//		if ( zap->GetElement(i + j*width)== '1')
+		//		{
+		//			static sf::RectangleShape Rectangle(sf::Vector2f(blockSize, blockSize));
+		//			Rectangle.setPosition(sf::Vector2f(i*blockSize, j*blockSize));
+		//			window.draw(Rectangle);
+		//		}
+		//}
+		/////////////////////////
+		//window.draw(unit.unitSprite);// win will draw all units from array.. now just 1 		
+		//static sf::RectangleShape circle1(sf::Vector2f(2, 2));											//
+		//circle1.setPosition(sf::Vector2f(unit.TargetPositionPoint.left, unit.TargetPositionPoint.top));	// draw current unit's target as red circle
+		//circle1.setFillColor(sf::Color::Red);															//
+		//window.draw(circle1);						
+		//window.display();
+		
+
+
+		//TEST Path///
 		for (int j = 0; j < height; j++)
-		{
-			for (int i = 0; i < width; i++)				
-				if ( zap->GetElement(i + j*width)== '1')
-				{
-					static sf::RectangleShape Rectangle(sf::Vector2f(blockSize, blockSize));
-					Rectangle.setPosition(sf::Vector2f(i*blockSize, j*blockSize));
-					window.draw(Rectangle);
-				}
-		}
-		///////////////////////
-		window.draw(unit.unitSprite);// will draw all units from array.. now just 1 		
-		static sf::RectangleShape circle1(sf::Vector2f(2, 2));											//
-		circle1.setPosition(sf::Vector2f(unit.TargetPositionPoint.left, unit.TargetPositionPoint.top));	// draw current unit's target as red circle
-		circle1.setFillColor(sf::Color::Red);															//
-		window.draw(circle1);						
-		window.display();
+			{
+				for (int i = 0; i < width; i++)				
+					if ( pathTest.PMap[i + j*width]>=995)
+					{
+						sf::RectangleShape Rectangle(sf::Vector2f(blockSize, blockSize));
+						Rectangle.setPosition(sf::Vector2f(i*blockSize, j*blockSize));
+						Rectangle.setFillColor(sf::Color::Red);
+						window.draw(Rectangle);
+					}
+					else if (pathTest.PMap[i + j*width]<=0)
+					{
+						sf::RectangleShape Rectangle(sf::Vector2f(blockSize, blockSize));
+						Rectangle.setPosition(sf::Vector2f(i*blockSize, j*blockSize));
+						Rectangle.setFillColor(sf::Color::Color(0.0, 0.0, 0.21*pathTest.PMap[i + j*width]));
+						window.draw(Rectangle);
+					}
+			}window.display();
+		////////////
 	}
 
-}
+};
