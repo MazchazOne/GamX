@@ -1,8 +1,5 @@
 #include "Graph.h"
-#include"GraphEdge.h"
-Graph::Graph(int map[], int xI, int yI) {
-		width = xI;
-		height = yI;
+Graph::Graph(char map[]) {
 		for (int j = 0; j < height; j++)
 			for (int i = 0; i < width; i++)
 				Edges.push_back((new GraphEdge(i + j*width)));
@@ -19,10 +16,10 @@ Graph::Graph(int map[], int xI, int yI) {
 					;
 				else
 				{
-					if (map[i + width*j + 1] == 0) Edges[i + j*width]->neighbors.push_back(Edges[i + width*j + 1]);
-					if (map[i + width*j + -1] == 0) Edges[i + j*width]->neighbors.push_back(Edges[i + width*j - 1]);
-					if (map[i + width*(j + 1)] == 0) Edges[i + j*width]->neighbors.push_back(Edges[i + width*(j + 1)]);
-					if (map[i + width*(j - 1)] == 0) Edges[i + j*width]->neighbors.push_back(Edges[i + width*(j - 1)]);
+					if (map[i + width*j + 1] == '0') Edges[i + j*width]->neighbors.push_back(Edges[i + width*j + 1]);
+					if (map[i + width*j + -1] == '0') Edges[i + j*width]->neighbors.push_back(Edges[i + width*j - 1]);
+					if (map[i + width*(j + 1)] == '0') Edges[i + j*width]->neighbors.push_back(Edges[i + width*(j + 1)]);
+					if (map[i + width*(j - 1)] == '0') Edges[i + j*width]->neighbors.push_back(Edges[i + width*(j - 1)]);
 				}
 			}
 	}
@@ -61,7 +58,7 @@ Graph::Graph(int map[], int xI, int yI) {
 				}
 			}
 		}
-
-
+		
+		path.pop();
 		return path;
 	}

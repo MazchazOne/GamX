@@ -130,7 +130,7 @@
     <ClCompile Include="Graph.cpp" />
     <ClCompile Include="GraphEdge.cpp" />
     <ClCompile Include="Map.cpp" />
-    <ClCompile Include="NewTry.cpp" />
+    <ClCompile Include="main.cpp" />
     <ClCompile Include="Path.cpp" />
     <ClCompile Include="Unit.cpp" />
   </ItemGroup>
