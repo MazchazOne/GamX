@@ -1,27 +1,24 @@
 #include "Graph.h"
-Graph::Graph(char map[]) {
+vector<GraphEdge*> Graph::Edges = {};
+char Graph::map[width*height * 4] = {};
+ void Graph::LoadMap(char map[]) {
+	 Edges = {};
 		for (int j = 0; j < height; j++)
 			for (int i = 0; i < width; i++)
 				Edges.push_back((new GraphEdge(i + j*width)));
 		for (int j = 0; j < height; j++)
 			for (int i = 0; i < width; i++)
 			{
-				if (i == 0)
-					;
-				else if (j == 0)
-					;
-				else if (i == width - 1)
-					;
-				else if (j == height - 1)
-					;
-				else
-				{
-					if (map[i + width*j + 1] == '0') Edges[i + j*width]->neighbors.push_back(Edges[i + width*j + 1]);
-					if (map[i + width*j + -1] == '0') Edges[i + j*width]->neighbors.push_back(Edges[i + width*j - 1]);
-					if (map[i + width*(j + 1)] == '0') Edges[i + j*width]->neighbors.push_back(Edges[i + width*(j + 1)]);
+				Graph::map[i + j*width] = map[i + j*width];
+				if (i != 0)
+					if (map[i + width*j -1] == '0') Edges[i + j*width]->neighbors.push_back(Edges[i + width*j - 1]);
+				if (j != 0)
 					if (map[i + width*(j - 1)] == '0') Edges[i + j*width]->neighbors.push_back(Edges[i + width*(j - 1)]);
-				}
-			}
+				if (i != width - 1)
+					if (map[i + width*j + 1] == '0') Edges[i + j*width]->neighbors.push_back(Edges[i + width*j + 1]);
+				if (j != height - 1)
+					if (map[i + width*(j + 1)] == '0') Edges[i + j*width]->neighbors.push_back(Edges[i + width*(j + 1)]);				
+			}		
 	}
 	stack<int>Graph::FindPath(int startIndex, int endIndex)
 	{
@@ -59,6 +56,6 @@ Graph::Graph(char map[]) {
 			}
 		}
 		
-		path.pop();
+		//path.pop();
 		return path;
 	}

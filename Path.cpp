@@ -68,8 +68,7 @@
 	void Path:: ChangedCoordForNextStep(float*x, float* y, 
 		sf::FloatRect currentCoord)
 	{	
-		sf::FloatRect targetCoord = sf::FloatRect(
-			
+		sf::FloatRect targetCoord = sf::FloatRect(			
 			stepsStack.top()%width*blockSize, 
 			stepsStack.top()/width*blockSize,2,2);
 		if (currentCoord.intersects(targetCoord))
@@ -110,15 +109,11 @@
 			else *x = 0;
 		}		
 	}
-	void Path::LoadMap(char map[]) //move ?
-	{
-		graph = new Graph(map);
-	}
 	/*int Path::operator() ()
 	{
 		stepsStack.top();
 	}*/
 	void Path::FindPath(int startIndex, int endIndex) 
 	{
-		stepsStack=graph->FindPath(startIndex, endIndex);
+		stepsStack=Graph::FindPath(startIndex, endIndex);
 	}	

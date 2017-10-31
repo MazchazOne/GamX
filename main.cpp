@@ -3,6 +3,7 @@
 #include "Unit.h"
 #include "Path.h"
 #include "Map.h"
+#include "Graph.h"
 //#include"GraphEdge.h"
 void main() 
 {
@@ -13,12 +14,13 @@ void main()
 	//
 	//std::cout << pathTest.fortest;
 	//////////TEST PATH
-
+	Graph::LoadMap(zap->map);
 	double deleteme = 1;
 	int delay =300;														//time delay for next step
-	sf::RenderWindow window(sf::VideoMode(width*blockSize, height*blockSize), "SFML works!");//create window
+	sf::RenderWindow window(
+		sf::VideoMode(width*blockSize, height*blockSize), "SFML works!");//create window
 	sf::Clock clock;														
-	Unit unit("images/sqad.png",zap->map);										//create mainPerson
+	Unit unit("images/sqad.png");										//create mainPerson
 	while (window.isOpen())										//Game loop/main loop
 	{
 		float time = clock.getElapsedTime().asMicroseconds();
@@ -39,10 +41,11 @@ void main()
 			int x = sf::Mouse::getPosition().x - window.getPosition().x - 7;
 			int y = sf::Mouse::getPosition().y - window.getPosition().y - 31;
 			unit.SetTarget(x, y);	
-			deleteme=-160;
+			//deleteme=-160;
+			Graph::LoadMap(zap->map);
 		}	
 		deleteme += 0.5;
-		unit.Step(time,zap->map);					//here array with all units...they will do their step /// now just 1 unit
+		unit.Step(time);					//here array with all units...they will do their step /// now just 1 unit
 		window.clear();		
 		/////////DRAW MAP//////// затоклнуть в метод карты...
 		for (int j = 0; j < height; j++)

@@ -21,11 +21,11 @@ public:
 
 	stack<int>GetPath();
 	
-	Unit(std::string pathForTexture, char map[]);
+	Unit(std::string pathForTexture);
 	void SetTarget(int x, int y); //Target for movement
-	void Step(float time, char* map);
-	void CollisionOnY(char* map);
-	void CollisionOnX(char* map);
+	void Step(float time);
+	void CollisionOnY();
+	void CollisionOnX();
 };
 
 

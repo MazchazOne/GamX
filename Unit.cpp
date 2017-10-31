@@ -1,29 +1,27 @@
 #include "Unit.h"
 
-Unit::Unit(std::string pathForTexture,char map[])
+Unit::Unit(std::string pathForTexture)
 {
 	unitImage.loadFromFile(pathForTexture);
 	unitTexture.loadFromImage(unitImage);
 	unitSprite.setTexture(unitTexture);
-	unitSprite.setPosition(80, 80);
-	ActualPositionRect = sf::FloatRect(80, 80, 20, 20);
+	unitSprite.setPosition(0, 0);
+	ActualPositionRect = sf::FloatRect(0,0, 20, 20);
 	UnitCenter = sf::FloatRect(ActualPositionRect.left + ActualPositionRect.width / 4,
 		ActualPositionRect.top + ActualPositionRect.height / 4,
-		/*ActualPositionRect.width/2*/1, 1/*ActualPositionRect.height/2*/);
+		/*ActualPositionRect.width/2*/1, /*ActualPositionRect.height/2*/1);
 	FolowingTarget = false;
-	path.LoadMap(map);
-
 }
 //stack<int>Unit::GetPath() {}
 void Unit::SetTarget(int x, int y) //Target for movement
 {
-	int startBlockIndex=ActualPositionRect.top/blockSize*width+ActualPositionRect.left / blockSize;
+	int startBlockIndex=(int)UnitCenter.top/blockSize*width+(int)UnitCenter.left / blockSize;
 	int endBlockIdex=y/blockSize*width+x/blockSize;
 	path.FindPath(startBlockIndex,endBlockIdex);	
 	TargetPositionPoint = sf::FloatRect(x, y, 1, 1);//zadat' netochnost'
 	FolowingTarget = true;
 }
-void Unit::Step(float time, char* map)
+void Unit::Step(float time)
 {
 	//handler for all path and create current chaging coord
 	if (UnitCenter.intersects(TargetPositionPoint))
@@ -35,9 +33,9 @@ void Unit::Step(float time, char* map)
 
 		path.ChangedCoordForNextStep(&Dx, &Dy, UnitCenter);		
 		ActualPositionRect.top += time*Dy;	//move	y	
-		CollisionOnY(map);					//collision y handler
+		CollisionOnY();					//collision y handler
 		ActualPositionRect.left += time*Dx;//move x
-		CollisionOnX(map);//time?;			//colision x handler
+		CollisionOnX();//time?;			//colision x handler
 		UnitCenter.left = ActualPositionRect.left + ActualPositionRect.width / 4;
 		UnitCenter.top = ActualPositionRect.top + ActualPositionRect.height / 4;
 			 
@@ -46,15 +44,14 @@ void Unit::Step(float time, char* map)
 		Dx = 0; Dy = 0;
 	}
 }
-void Unit::CollisionOnY(char* map)
-{
-
+void Unit::CollisionOnY(/*char* map*/)
+{	
 	for (int j = ActualPositionRect.top / blockSize; 
 		j < (ActualPositionRect.top + ActualPositionRect.height) / blockSize; j++)
 		for (int i = ActualPositionRect.left / blockSize; 
 			i < (ActualPositionRect.left + ActualPositionRect.width) / blockSize; i++)
 		{
-			if (map[i + width*j] == blockChar)
+			if (Graph::map[i + width*j] == blockChar)
 			{
 				if (Dy > 0)
 				{
@@ -67,15 +64,14 @@ void Unit::CollisionOnY(char* map)
 			}
 		}
 }
-void Unit::CollisionOnX(char* map)
-{
-
+void Unit::CollisionOnX()
+{	
 	for (int j = ActualPositionRect.top / blockSize;
 		j < (ActualPositionRect.top + ActualPositionRect.height) / blockSize; j++)
 		for (int i = ActualPositionRect.left / blockSize; 
 			i < (ActualPositionRect.left + ActualPositionRect.width) / blockSize; i++)
 		{
-			if (map[i + width*j] == blockChar)
+			if (Graph::map[i + width*j] == blockChar)
 			{
 				if (Dx > 0)
 				{
