@@ -7,9 +7,10 @@ Unit::Unit(std::string pathForTexture)
 	unitSprite.setTexture(unitTexture);
 	unitSprite.setPosition(0, 0);
 	ActualPositionRect = sf::FloatRect(0,0, 20, 20);
-	UnitCenter = sf::FloatRect(ActualPositionRect.left + ActualPositionRect.width / 4,
-		ActualPositionRect.top + ActualPositionRect.height / 4,
-		/*ActualPositionRect.width/2*/1, /*ActualPositionRect.height/2*/1);
+	UnitCenter = sf::FloatRect(ActualPositionRect.left, ActualPositionRect.height, 1, 1);
+		//sf::FloatRect(ActualPositionRect.left + ActualPositionRect.width / 4,
+	//	ActualPositionRect.top + ActualPositionRect.height / 4,
+	//	/*ActualPositionRect.width/2*/1, /*ActualPositionRect.height/2*/1);
 	FolowingTarget = false;
 }
 //stack<int>Unit::GetPath() {}
@@ -28,7 +29,7 @@ void Unit::Step(float time)
 	{
 		FolowingTarget = false;
 	}
-	if (FolowingTarget == true)				//if unit out from target zone // start movement
+	if (FolowingTarget == true&&path.stepsStack.size()>=1)				//if unit out from target zone // start movement
 	{
 
 		path.ChangedCoordForNextStep(&Dx, &Dy, UnitCenter);		
@@ -36,8 +37,13 @@ void Unit::Step(float time)
 		CollisionOnY();					//collision y handler
 		ActualPositionRect.left += time*Dx;//move x
 		CollisionOnX();//time?;			//colision x handler
-		UnitCenter.left = ActualPositionRect.left + ActualPositionRect.width / 4;
-		UnitCenter.top = ActualPositionRect.top + ActualPositionRect.height / 4;
+
+		UnitCenter = sf::FloatRect(ActualPositionRect.left, ActualPositionRect.height, 1, 1);
+		UnitCenter.left = ActualPositionRect.left;
+		UnitCenter.top = ActualPositionRect.top;
+
+		/*UnitCenter.left = ActualPositionRect.left + ActualPositionRect.width / 4;
+		UnitCenter.top = ActualPositionRect.top + ActualPositionRect.height / 4;*/
 			 
 		/*	ActualPositionRect.width / 2, ActualPositionRect.height / 2);*/
 		unitSprite.setPosition(ActualPositionRect.left, ActualPositionRect.top);//new coordinate for unit's sprite

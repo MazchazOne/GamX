@@ -16,7 +16,7 @@ void main()
 	//////////TEST PATH
 	Graph::LoadMap(zap->map);
 	double deleteme = 1;
-	int delay =300;														//time delay for next step
+	int delay =3;														//time delay for next step
 	sf::RenderWindow window(
 		sf::VideoMode(width*blockSize, height*blockSize), "SFML works!");//create window
 	sf::Clock clock;														
@@ -44,7 +44,7 @@ void main()
 			//deleteme=-160;
 			Graph::LoadMap(zap->map);
 		}	
-		deleteme += 0.5;
+		//deleteme += 0.5;
 		unit.Step(time);					//here array with all units...they will do their step /// now just 1 unit
 		window.clear();		
 		/////////DRAW MAP//////// затоклнуть в метод карты...

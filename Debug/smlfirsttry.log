@@ -1,8 +1,11 @@
 ﻿C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets(392,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (smlfirsttry.vcxproj).  This can lead to incorrect clean and rebuild behavior.
-  main.cpp
-c:\users\lenovo\documents\visual studio 2015\projects\smlsecondtry\smlfirsttry\graph.h(15): warning C4091: static : пропускается слева от "Graph", когда ни одна переменная не объявлена
-c:\users\lenovo\documents\visual studio 2015\projects\smlsecondtry\smlfirsttry\main.cpp(26): warning C4244: инициализация: преобразование "sf::Int64" в "float", возможна потеря данных
-c:\users\lenovo\documents\visual studio 2015\projects\smlsecondtry\smlfirsttry\main.cpp(56): warning C4244: аргумент: преобразование "const int" в "float", возможна потеря данных
-c:\users\lenovo\documents\visual studio 2015\projects\smlsecondtry\smlfirsttry\main.cpp(57): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+  Unit.cpp
+c:\users\lenovo\documents\visual studio 2015\projects\smlsecondtry\smlfirsttry\unit.cpp(22): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+c:\users\lenovo\documents\visual studio 2015\projects\smlsecondtry\smlfirsttry\unit.cpp(55): warning C4244: инициализация: преобразование "float" в "int", возможна потеря данных
+c:\users\lenovo\documents\visual studio 2015\projects\smlsecondtry\smlfirsttry\unit.cpp(57): warning C4244: инициализация: преобразование "float" в "int", возможна потеря данных
+c:\users\lenovo\documents\visual studio 2015\projects\smlsecondtry\smlfirsttry\unit.cpp(68): warning C4244: =: преобразование "int" в "float", возможна потеря данных
+c:\users\lenovo\documents\visual studio 2015\projects\smlsecondtry\smlfirsttry\unit.cpp(75): warning C4244: инициализация: преобразование "float" в "int", возможна потеря данных
+c:\users\lenovo\documents\visual studio 2015\projects\smlsecondtry\smlfirsttry\unit.cpp(77): warning C4244: инициализация: преобразование "float" в "int", возможна потеря данных
+c:\users\lenovo\documents\visual studio 2015\projects\smlsecondtry\smlfirsttry\unit.cpp(88): warning C4244: =: преобразование "int" в "float", возможна потеря данных
   smlfirsttry.vcxproj -> C:\Users\Lenovo\Documents\Visual Studio 2015\Projects\smlSecondtry\Debug\PROJECT.exe
   smlfirsttry.vcxproj -> C:\Users\Lenovo\Documents\Visual Studio 2015\Projects\smlSecondtry\Debug\PROJECT.pdb (Partial PDB)

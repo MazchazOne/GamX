@@ -70,7 +70,7 @@
 	{	
 		sf::FloatRect targetCoord = sf::FloatRect(			
 			stepsStack.top()%width*blockSize, 
-			stepsStack.top()/width*blockSize,2,2);
+			stepsStack.top()/width*blockSize,1,1);
 		if (currentCoord.intersects(targetCoord))
 		{
 			if (stepsStack.size()>1)
@@ -85,27 +85,27 @@
 		if (Dx > Dy)
 		{
 			if (currentCoord.left < targetCoord.left)
-				*x += 0.05;
+				*x += 0.0005;
 			else if (currentCoord.left > targetCoord.left)
-				*x -= 0.05;
+				*x -= 0.0005;
 			else *x = 0;
 			if (currentCoord.top < targetCoord.top)
-				*y += 0.05;
+				*y += 0.0005;
 			else if (currentCoord.top > targetCoord.top)
-				*y -= 0.05;
+				*y -= 0.0005;
 			else *y = 0;
 		}
 		else
 		{
 			if (currentCoord.top < targetCoord.top)
-				*y += 0.05;
+				*y += 0.0005;
 			else if (currentCoord.top > targetCoord.top)
-				*y -= 0.05;
+				*y -= 0.0005;
 			else *y = 0;
 			if (!(currentCoord.intersects(targetCoord)) && (currentCoord.left < targetCoord.left))
-				*x += 0.05;
+				*x += 0.0005;
 			else if (currentCoord.left > targetCoord.left)
-				*x -= 0.05;
+				*x -= 0.0005;
 			else *x = 0;
 		}		
 	}

@@ -1,7 +1,7 @@
 #pragma once
 #include"GraphEdge.h"
 #include"constants.h"
-static class Graph {
+class Graph {
 public:
 	static vector<GraphEdge*>Edges;
 	/*int width;

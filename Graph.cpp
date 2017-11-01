@@ -55,7 +55,7 @@ char Graph::map[width*height * 4] = {};
 				}
 			}
 		}
-		
-		//path.pop();
+		if(path.size()>1)
+		path.pop();
 		return path;
 	}
