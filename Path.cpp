@@ -66,12 +66,12 @@
 //{
 //}
 	void Path:: ChangedCoordForNextStep(float*x, float* y, 
-		sf::FloatRect currentCoord)
+		sf::FloatRect* currentCoord,float time)
 	{	
 		sf::FloatRect targetCoord = sf::FloatRect(			
 			stepsStack.top()%width*blockSize, 
 			stepsStack.top()/width*blockSize,1,1);
-		if (currentCoord.intersects(targetCoord))
+		if (currentCoord->intersects(targetCoord))
 		{
 			if (stepsStack.size()>1)
 			stepsStack.pop();
@@ -79,40 +79,56 @@
 			*y = 0;
 			return;
 		}
+		double D = 0.0005;
+		int Dx = abs(currentCoord->left - targetCoord.left);
+		int Dy = abs(currentCoord->top - targetCoord.top);
+	
 
-		int Dx = abs(currentCoord.left - targetCoord.left);
-		int Dy = abs(currentCoord.top - targetCoord.top);
 		if (Dx > Dy)
 		{
-			if (currentCoord.left < targetCoord.left)
-				*x += 0.0005;
-			else if (currentCoord.left > targetCoord.left)
-				*x -= 0.0005;
-			else *x = 0;
-			if (currentCoord.top < targetCoord.top)
-				*y += 0.0005;
-			else if (currentCoord.top > targetCoord.top)
-				*y -= 0.0005;
-			else *y = 0;
+			if (Dx <= time*D)
+				currentCoord->left = targetCoord.left;
+			else {
+				if (currentCoord->left < targetCoord.left)
+					*x += D;
+				else if (currentCoord->left > targetCoord.left)
+					*x -= D;
+				else *x = 0;
+				if (Dy <= time*D)
+					currentCoord->top = targetCoord.top;
+				else if (currentCoord->top < targetCoord.top)
+					*y += D;
+				else if (currentCoord->top > targetCoord.top)
+					*y -= D;
+				else *y = 0;
+
+				*x *= time;
+				*y *= time;
+			}
 		}
 		else
 		{
-			if (currentCoord.top < targetCoord.top)
-				*y += 0.0005;
-			else if (currentCoord.top > targetCoord.top)
-				*y -= 0.0005;
-			else *y = 0;
-			if (!(currentCoord.intersects(targetCoord)) && (currentCoord.left < targetCoord.left))
-				*x += 0.0005;
-			else if (currentCoord.left > targetCoord.left)
-				*x -= 0.0005;
-			else *x = 0;
+			if (Dy <= time* D)
+				currentCoord->top = targetCoord.top;
+			else {
+				if (currentCoord->top < targetCoord.top)
+					*y += D;
+				else if (currentCoord->top > targetCoord.top)
+					*y -= D;
+				else *y = 0;
+				if (Dx <= time*D)
+					currentCoord->left = targetCoord.left;
+				else if (!(currentCoord->intersects(targetCoord)) && (currentCoord->left < targetCoord.left))
+					*x += D;
+				else if (currentCoord->left > targetCoord.left)
+					*x -= D;
+				else *x = 0;
+
+				*x *= time;
+				*y *= time;
+			}			
 		}		
 	}
-	/*int Path::operator() ()
-	{
-		stepsStack.top();
-	}*/
 	void Path::FindPath(int startIndex, int endIndex) 
 	{
 		stepsStack=Graph::FindPath(startIndex, endIndex);

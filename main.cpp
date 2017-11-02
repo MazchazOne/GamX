@@ -14,9 +14,8 @@ void main()
 	//
 	//std::cout << pathTest.fortest;
 	//////////TEST PATH
-	Graph::LoadMap(zap->map);
-	double deleteme = 1;
-	int delay =3;														//time delay for next step
+	Graph::LoadMap(zap->map);	
+	int delay =1;														//time delay for next step
 	sf::RenderWindow window(
 		sf::VideoMode(width*blockSize, height*blockSize), "SFML works!");//create window
 	sf::Clock clock;														
@@ -36,7 +35,7 @@ void main()
 
 ////
 
-		if (event.type == sf::Event::MouseButtonPressed&&event.mouseButton.button == sf::Mouse::Right&&deleteme>=1)//let coordinateRight click to current unit
+		if (event.type == sf::Event::MouseButtonPressed&&event.mouseButton.button == sf::Mouse::Right)//let coordinateRight click to current unit
 		{
 			int x = sf::Mouse::getPosition().x - window.getPosition().x - 7;
 			int y = sf::Mouse::getPosition().y - window.getPosition().y - 31;

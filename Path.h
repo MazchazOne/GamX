@@ -20,7 +20,7 @@ public:
 	sf::Vector2<int> targetPosition = sf::Vector2<int>(372 / blockSize, 319 / blockSize);///// координаты таргета 
 	//void qwe(sf::Vector2<int> point, int potentialForCurrentPoint);////рекурсивный метод для заполнения положительным приоритетом	
 	void InitPMap(char map[width*height * 4]);
-	void ChangedCoordForNextStep(float*x, float* y, sf::FloatRect currentCoordIn);	
+	void ChangedCoordForNextStep(float*x, float* y, sf::FloatRect* currentCoordIn,float time);	
 	void FindPath(int startIndex, int endIndex);
 	void Path::Move(char map[]);
 	//int operator() ();

@@ -1,11 +1,24 @@
 ﻿C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets(392,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (smlfirsttry.vcxproj).  This can lead to incorrect clean and rebuild behavior.
   Unit.cpp
-c:\users\lenovo\documents\visual studio 2015\projects\smlsecondtry\smlfirsttry\unit.cpp(22): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
-c:\users\lenovo\documents\visual studio 2015\projects\smlsecondtry\smlfirsttry\unit.cpp(55): warning C4244: инициализация: преобразование "float" в "int", возможна потеря данных
-c:\users\lenovo\documents\visual studio 2015\projects\smlsecondtry\smlfirsttry\unit.cpp(57): warning C4244: инициализация: преобразование "float" в "int", возможна потеря данных
-c:\users\lenovo\documents\visual studio 2015\projects\smlsecondtry\smlfirsttry\unit.cpp(68): warning C4244: =: преобразование "int" в "float", возможна потеря данных
-c:\users\lenovo\documents\visual studio 2015\projects\smlsecondtry\smlfirsttry\unit.cpp(75): warning C4244: инициализация: преобразование "float" в "int", возможна потеря данных
-c:\users\lenovo\documents\visual studio 2015\projects\smlsecondtry\smlfirsttry\unit.cpp(77): warning C4244: инициализация: преобразование "float" в "int", возможна потеря данных
-c:\users\lenovo\documents\visual studio 2015\projects\smlsecondtry\smlfirsttry\unit.cpp(88): warning C4244: =: преобразование "int" в "float", возможна потеря данных
-  smlfirsttry.vcxproj -> C:\Users\Lenovo\Documents\Visual Studio 2015\Projects\smlSecondtry\Debug\PROJECT.exe
-  smlfirsttry.vcxproj -> C:\Users\Lenovo\Documents\Visual Studio 2015\Projects\smlSecondtry\Debug\PROJECT.pdb (Partial PDB)
+c:\users\lenovo\documents\visual studio 2015\projects\gamex\smlfirsttry\unit.cpp(22): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+c:\users\lenovo\documents\visual studio 2015\projects\gamex\smlfirsttry\unit.cpp(55): warning C4244: инициализация: преобразование "float" в "int", возможна потеря данных
+c:\users\lenovo\documents\visual studio 2015\projects\gamex\smlfirsttry\unit.cpp(57): warning C4244: инициализация: преобразование "float" в "int", возможна потеря данных
+c:\users\lenovo\documents\visual studio 2015\projects\gamex\smlfirsttry\unit.cpp(68): warning C4244: =: преобразование "int" в "float", возможна потеря данных
+c:\users\lenovo\documents\visual studio 2015\projects\gamex\smlfirsttry\unit.cpp(75): warning C4244: инициализация: преобразование "float" в "int", возможна потеря данных
+c:\users\lenovo\documents\visual studio 2015\projects\gamex\smlfirsttry\unit.cpp(77): warning C4244: инициализация: преобразование "float" в "int", возможна потеря данных
+c:\users\lenovo\documents\visual studio 2015\projects\gamex\smlfirsttry\unit.cpp(88): warning C4244: =: преобразование "int" в "float", возможна потеря данных
+  Path.cpp
+c:\users\lenovo\documents\visual studio 2015\projects\gamex\smlfirsttry\path.cpp(73): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+c:\users\lenovo\documents\visual studio 2015\projects\gamex\smlfirsttry\path.cpp(83): warning C4244: инициализация: преобразование "float" в "int", возможна потеря данных
+c:\users\lenovo\documents\visual studio 2015\projects\gamex\smlfirsttry\path.cpp(84): warning C4244: инициализация: преобразование "float" в "int", возможна потеря данных
+c:\users\lenovo\documents\visual studio 2015\projects\gamex\smlfirsttry\path.cpp(93): warning C4244: +=: преобразование "double" в "float", возможна потеря данных
+c:\users\lenovo\documents\visual studio 2015\projects\gamex\smlfirsttry\path.cpp(95): warning C4244: -=: преобразование "double" в "float", возможна потеря данных
+c:\users\lenovo\documents\visual studio 2015\projects\gamex\smlfirsttry\path.cpp(100): warning C4244: +=: преобразование "double" в "float", возможна потеря данных
+c:\users\lenovo\documents\visual studio 2015\projects\gamex\smlfirsttry\path.cpp(102): warning C4244: -=: преобразование "double" в "float", возможна потеря данных
+c:\users\lenovo\documents\visual studio 2015\projects\gamex\smlfirsttry\path.cpp(115): warning C4244: +=: преобразование "double" в "float", возможна потеря данных
+c:\users\lenovo\documents\visual studio 2015\projects\gamex\smlfirsttry\path.cpp(117): warning C4244: -=: преобразование "double" в "float", возможна потеря данных
+c:\users\lenovo\documents\visual studio 2015\projects\gamex\smlfirsttry\path.cpp(122): warning C4244: +=: преобразование "double" в "float", возможна потеря данных
+c:\users\lenovo\documents\visual studio 2015\projects\gamex\smlfirsttry\path.cpp(124): warning C4244: -=: преобразование "double" в "float", возможна потеря данных
+  Создание кода...
+  smlfirsttry.vcxproj -> C:\Users\Lenovo\Documents\Visual Studio 2015\Projects\GameX\Debug\PROJECT.exe
+  smlfirsttry.vcxproj -> C:\Users\Lenovo\Documents\Visual Studio 2015\Projects\GameX\Debug\PROJECT.pdb (Partial PDB)
