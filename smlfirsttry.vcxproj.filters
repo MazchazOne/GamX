@@ -13,25 +13,64 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Файлы исходного кода\Map">
+      <UniqueIdentifier>{4409ee63-f56c-43d9-b5c3-8f125dd8b6f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы исходного кода\Map\Graph">
+      <UniqueIdentifier>{033f031c-3196-4eaa-8c66-90b03cd47fda}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы исходного кода\Map\Blocks">
+      <UniqueIdentifier>{d79ff3f0-390b-4d2e-9b7e-13b143b920b9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы исходного кода\Action">
+      <UniqueIdentifier>{7b897493-2c19-484b-92c0-98e58db30af6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы исходного кода\Items%255cObjects">
+      <UniqueIdentifier>{7b90e5d2-9500-4091-8981-b77b22a58327}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Unit.cpp">
       <Filter>Файлы исходного кода</Filter>
     </ClCompile>
-    <ClCompile Include="Path.cpp">
+    <ClCompile Include="main.cpp">
       <Filter>Файлы исходного кода</Filter>
     </ClCompile>
     <ClCompile Include="Map.cpp">
-      <Filter>Файлы исходного кода</Filter>
+      <Filter>Файлы исходного кода\Map</Filter>
     </ClCompile>
-    <ClCompile Include="GraphEdge.cpp">
-      <Filter>Файлы исходного кода</Filter>
+    <ClCompile Include="MapCell.cpp">
+      <Filter>Файлы исходного кода\Map</Filter>
     </ClCompile>
     <ClCompile Include="Graph.cpp">
-      <Filter>Файлы исходного кода</Filter>
+      <Filter>Файлы исходного кода\Map\Graph</Filter>
     </ClCompile>
-    <ClCompile Include="main.cpp">
-      <Filter>Файлы исходного кода</Filter>
+    <ClCompile Include="GraphEdge.cpp">
+      <Filter>Файлы исходного кода\Map\Graph</Filter>
+    </ClCompile>
+    <ClCompile Include="Path.cpp">
+      <Filter>Файлы исходного кода\Map\Graph</Filter>
+    </ClCompile>
+    <ClCompile Include="Container.cpp">
+      <Filter>Файлы исходного кода\Map\Blocks</Filter>
+    </ClCompile>
+    <ClCompile Include="StoneBlock.cpp">
+      <Filter>Файлы исходного кода\Map\Blocks</Filter>
+    </ClCompile>
+    <ClCompile Include="MapObject.cpp">
+      <Filter>Файлы исходного кода\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="Action.cpp">
+      <Filter>Файлы исходного кода\Action</Filter>
+    </ClCompile>
+    <ClCompile Include="BasicAction.cpp">
+      <Filter>Файлы исходного кода\Action</Filter>
+    </ClCompile>
+    <ClCompile Include="Object.cpp">
+      <Filter>Файлы исходного кода\Items%255cObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="ResourseBlock.cpp">
+      <Filter>Файлы исходного кода\Map\Blocks</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -48,6 +87,33 @@
       <Filter>Заголовочные файлы</Filter>
     </ClInclude>
     <ClInclude Include="GraphEdge.h">
+      <Filter>Заголовочные файлы</Filter>
+    </ClInclude>
+    <ClInclude Include="Point.h">
+      <Filter>Заголовочные файлы</Filter>
+    </ClInclude>
+    <ClInclude Include="Container.h">
+      <Filter>Заголовочные файлы</Filter>
+    </ClInclude>
+    <ClInclude Include="MapObject.h">
+      <Filter>Заголовочные файлы</Filter>
+    </ClInclude>
+    <ClInclude Include="Action.h">
+      <Filter>Заголовочные файлы</Filter>
+    </ClInclude>
+    <ClInclude Include="BasicAction.h">
+      <Filter>Заголовочные файлы</Filter>
+    </ClInclude>
+    <ClInclude Include="StoneBlock.h">
+      <Filter>Заголовочные файлы</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourseBlock.h">
+      <Filter>Заголовочные файлы</Filter>
+    </ClInclude>
+    <ClInclude Include="MapCell.h">
+      <Filter>Заголовочные файлы</Filter>
+    </ClInclude>
+    <ClInclude Include="Object.h">
       <Filter>Заголовочные файлы</Filter>
     </ClInclude>
     <ClInclude Include="Graph.h">

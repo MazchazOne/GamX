@@ -2,11 +2,19 @@
 #include <SFML/Graphics.hpp>
 #include"Path.h"
 #include <stack>
+#include "Object.h"
 class Unit
 {
 public:
+	struct backpack
+	{
+		double maxWeidth;//!!
+		double currentWeidth;
+		std::vector<Object*> content;
+	};
+
 	sf::Texture unitTexture;
-	sf::Image unitImage;
+	//sf::Image unitImage;
 	sf::Sprite unitSprite;
 	int pixelsSizeX = 20;//probably useles
 	int pixelsSizeY = 20;//probably useles

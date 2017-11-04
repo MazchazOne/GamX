@@ -3,10 +3,12 @@
 #include <fstream>
 #include<iostream>
 #include <SFML/Graphics.hpp>
+#include "MapCell.h"
+#include "StoneBlock.h"
 class Map // NEED RECREATE THIS CLASS
 {
 public:
-	char map[width*height * 4];
+	static char mapChar[width*height * 4];
 	/*void DisplayMap()
 	{
 	for (int j = 0; j < height; j++)
@@ -28,11 +30,13 @@ public:
 	{
 	return map;
 	}*/
-	char GetElement(int index);	
-	void SetElement(int index, char value);
+	static std::vector<MapCell*> map;
+	static char GetElement(int index);	
+	//void SetElement(int index, char value);
 	Map(std::string name = "MAP.txt");	
-	void GetMapfromFile(std::string name = "MAP.txt");	
-	void test(sf::Sprite* qwe);	
+	static void GetMapfromFile(std::string name = "MAP.txt");	
+	void CreateMapFromCharMap();
+	//void test(sf::Sprite* qwe);	
 	/*bool IsBlock()
 	{}*/
 };

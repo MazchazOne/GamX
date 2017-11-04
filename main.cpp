@@ -1,20 +1,23 @@
 #include <iostream>
+#include <SFML/Graphics.hpp>
 #include "constants.h"
 #include "Unit.h"
 #include "Path.h"
 #include "Map.h"
 #include "Graph.h"
+#include "Point.h"
 //#include"GraphEdge.h"
 void main() 
-{
-	Map *zap = new Map();	//create map
+{	
+	//Map *zap = new Map();	//create map
+	Map::GetMapfromFile();
 	////////TEST PATH
 	//Path pathTest;	
 	//pathTest.InitPMap(zap->map);
 	//
 	//std::cout << pathTest.fortest;
 	//////////TEST PATH
-	Graph::LoadMap(zap->map);	
+	Graph::LoadMap(Map::mapChar);	
 	int delay =1;														//time delay for next step
 	sf::RenderWindow window(
 		sf::VideoMode(width*blockSize, height*blockSize), "SFML works!");//create window
@@ -41,7 +44,7 @@ void main()
 			int y = sf::Mouse::getPosition().y - window.getPosition().y - 31;
 			unit.SetTarget(x, y);	
 			//deleteme=-160;
-			Graph::LoadMap(zap->map);
+			Graph::LoadMap(Map::mapChar);
 		}	
 		//deleteme += 0.5;
 		unit.Step(time);					//here array with all units...they will do their step /// now just 1 unit
@@ -50,7 +53,7 @@ void main()
 		for (int j = 0; j < height; j++)
 		{
 			for (int i = 0; i < width; i++)				
-				if ( zap->GetElement(i + j*width)== '1')
+				if ( Map::GetElement(i + j*width)== '1')
 				{
 					static sf::RectangleShape Rectangle(sf::Vector2f(blockSize, blockSize));
 					Rectangle.setPosition(sf::Vector2f(i*blockSize, j*blockSize));
@@ -61,14 +64,11 @@ void main()
 		window.draw(unit.unitSprite);// win will draw all units from array.. now just 1 		
 		static sf::RectangleShape circle1(sf::Vector2f(2, 2));											//
 		circle1.setPosition(sf::Vector2f(unit.TargetPositionPoint.left, unit.TargetPositionPoint.top));	// draw current unit's target as red circle
-		circle1.setFillColor(sf::Color::Red);															//
+		circle1.setFillColor(sf::Color::Red);				//
+//		unit.Draw();
 		window.draw(circle1);						
 		window.display();
 		window.clear();
-		
-
-
-
 
 		//TEST Path///
 		/*while (1!=0)

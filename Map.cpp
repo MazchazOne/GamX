@@ -3,49 +3,41 @@
 #include <fstream>
 #include<iostream>
 #include <SFML/Graphics.hpp>
+//Map::map
+std::vector<MapCell*> Map::map = {};
+char Map::mapChar[width*height * 4] = {};
 char Map::GetElement(int index)
 {
-	return map[index];
+	return mapChar[index];
 }
-void Map::SetElement(int index, char value)
+/*void Map::SetElement(int index, char value)
 {
 	map[index] = value;
-}// ÝÒÎÒ ÎÒÑÒÎÉ ÓÁÐÀÒÜ È ÑÄÅËÀÒÜ ÍÎÐÌÀËÜÍÅ ÎÁÐÀÙÅÍÈÅ
+}*/// ÝÒÎÒ ÎÒÑÒÎÉ ÓÁÐÀÒÜ È ÑÄÅËÀÒÜ ÍÎÐÌÀËÜÍÅ ÎÁÐÀÙÅÍÈÅ
 Map::Map(std::string name)
 {
 	GetMapfromFile(name);
 }
 void Map::GetMapfromFile(std::string name )
 {
-	std::ifstream map1;
-	map1.open(name);
-	/*char input[width*height * 4];*/
+	std::ifstream mapInput;
+	mapInput.open(name);
 	std::string newelement;
 	int j = 0;
-	while (!map1.eof())
+	while (!mapInput.eof())
 	{
-		map1 >> newelement;
+		mapInput >> newelement;
 		for (int i = 0; i < width; i++)
-			map[i + j*width] = newelement[i];
-		j++;
+			mapChar[i + j*width] = newelement[i];
+		j++;				
 	}
-	map1.close();
+	mapInput.close();
 }
-void Map::test(sf::Sprite* qwe)
-{
-	sf::Texture texture;
-	texture.loadFromFile("images/sqad.png");
-
-	for (int j = 0; j < height; j++)
-		for (int i = 0; i < width; i++)
-		{
-			if (map[i + j*width] == '1')
-			{
-				qwe[i + j*width].setTexture(texture);//òàéë êàêîéíèòü
-				qwe[i + j*width].setPosition(i*blockSize, j*blockSize);
-			}
-
-		}
+void Map::CreateMapFromCharMap()
+{	
+	for (int i = 0; i < width*height * 4; i++) 
+	{
+		if (mapChar == "1")
+			map[i] = new MapCell(new StoneBlock(), i);
+	}
 }
-/*bool IsBlock()
-{}*/

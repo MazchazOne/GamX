@@ -2,8 +2,8 @@
 
 Unit::Unit(std::string pathForTexture)
 {
-	unitImage.loadFromFile(pathForTexture);
-	unitTexture.loadFromImage(unitImage);
+	//unitImage.loadFromFile(pathForTexture);
+	unitTexture.loadFromFile(pathForTexture);
 	unitSprite.setTexture(unitTexture);
 	unitSprite.setPosition(0, 0);
 	ActualPositionRect = sf::FloatRect(0,0, 20, 20);

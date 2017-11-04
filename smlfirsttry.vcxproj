@@ -22,7 +22,7 @@
     <ProjectGuid>{095DE4FF-3662-40B0-9A25-56AD7F53CAE8}</ProjectGuid>
     <RootNamespace>smlfirsttry</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
-    <ProjectName>PROJECT</ProjectName>
+    <ProjectName>GameX</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -127,19 +127,36 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Action.cpp" />
+    <ClCompile Include="BasicAction.cpp" />
+    <ClCompile Include="Container.cpp" />
     <ClCompile Include="Graph.cpp" />
     <ClCompile Include="GraphEdge.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MapCell.cpp" />
+    <ClCompile Include="MapObject.cpp" />
+    <ClCompile Include="Object.cpp" />
     <ClCompile Include="Path.cpp" />
+    <ClCompile Include="ResourseBlock.cpp" />
+    <ClCompile Include="StoneBlock.cpp" />
     <ClCompile Include="Unit.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Action.h" />
+    <ClInclude Include="BasicAction.h" />
     <ClInclude Include="constants.h" />
+    <ClInclude Include="Container.h" />
     <ClInclude Include="Graph.h" />
     <ClInclude Include="GraphEdge.h" />
     <ClInclude Include="Map.h" />
+    <ClInclude Include="MapCell.h" />
+    <ClInclude Include="MapObject.h" />
+    <ClInclude Include="Object.h" />
     <ClInclude Include="Path.h" />
+    <ClInclude Include="Point.h" />
+    <ClInclude Include="ResourseBlock.h" />
+    <ClInclude Include="StoneBlock.h" />
     <ClInclude Include="Unit.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
