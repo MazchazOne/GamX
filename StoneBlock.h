@@ -5,7 +5,7 @@ class StoneBlock :
 	public ResourseBlock
 {
 public:
-	StoneBlock();
+	static sf::Texture texture;	
+ 	StoneBlock();
 	~StoneBlock();
 };
-

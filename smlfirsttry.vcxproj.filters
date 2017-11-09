@@ -28,6 +28,21 @@
     <Filter Include="Файлы исходного кода\Items%255cObjects">
       <UniqueIdentifier>{7b90e5d2-9500-4091-8981-b77b22a58327}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Заголовочные файлы\Action">
+      <UniqueIdentifier>{b309d455-7d44-42fc-bd78-1c10aa4d6734}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Заголовочные файлы\Items%255cObjects">
+      <UniqueIdentifier>{1ad274aa-b605-48cd-8d3f-7ab25e7a5146}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Заголовочные файлы\Map">
+      <UniqueIdentifier>{cfaa2fdf-3af3-4f7d-945f-dc2b371f1fd4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Заголовочные файлы\Map\Blocks">
+      <UniqueIdentifier>{42ca137d-dc46-44b2-be3a-75a320d47d71}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Заголовочные файлы\Map\Graph">
+      <UniqueIdentifier>{e6fbfc2a-fa92-4b1c-985c-0c8b487b70a3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Unit.cpp">
@@ -80,44 +95,44 @@
     <ClInclude Include="constants.h">
       <Filter>Заголовочные файлы</Filter>
     </ClInclude>
-    <ClInclude Include="Path.h">
-      <Filter>Заголовочные файлы</Filter>
-    </ClInclude>
-    <ClInclude Include="Map.h">
-      <Filter>Заголовочные файлы</Filter>
-    </ClInclude>
-    <ClInclude Include="GraphEdge.h">
-      <Filter>Заголовочные файлы</Filter>
-    </ClInclude>
-    <ClInclude Include="Point.h">
-      <Filter>Заголовочные файлы</Filter>
-    </ClInclude>
-    <ClInclude Include="Container.h">
-      <Filter>Заголовочные файлы</Filter>
-    </ClInclude>
-    <ClInclude Include="MapObject.h">
-      <Filter>Заголовочные файлы</Filter>
-    </ClInclude>
     <ClInclude Include="Action.h">
-      <Filter>Заголовочные файлы</Filter>
+      <Filter>Заголовочные файлы\Action</Filter>
     </ClInclude>
     <ClInclude Include="BasicAction.h">
-      <Filter>Заголовочные файлы</Filter>
-    </ClInclude>
-    <ClInclude Include="StoneBlock.h">
-      <Filter>Заголовочные файлы</Filter>
-    </ClInclude>
-    <ClInclude Include="ResourseBlock.h">
-      <Filter>Заголовочные файлы</Filter>
-    </ClInclude>
-    <ClInclude Include="MapCell.h">
-      <Filter>Заголовочные файлы</Filter>
+      <Filter>Заголовочные файлы\Action</Filter>
     </ClInclude>
     <ClInclude Include="Object.h">
-      <Filter>Заголовочные файлы</Filter>
+      <Filter>Заголовочные файлы\Items%255cObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Map.h">
+      <Filter>Заголовочные файлы\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="MapCell.h">
+      <Filter>Заголовочные файлы\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="Container.h">
+      <Filter>Заголовочные файлы\Map\Blocks</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourseBlock.h">
+      <Filter>Заголовочные файлы\Map\Blocks</Filter>
+    </ClInclude>
+    <ClInclude Include="StoneBlock.h">
+      <Filter>Заголовочные файлы\Map\Blocks</Filter>
     </ClInclude>
     <ClInclude Include="Graph.h">
-      <Filter>Заголовочные файлы</Filter>
+      <Filter>Заголовочные файлы\Map\Graph</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphEdge.h">
+      <Filter>Заголовочные файлы\Map\Graph</Filter>
+    </ClInclude>
+    <ClInclude Include="Path.h">
+      <Filter>Заголовочные файлы\Map\Graph</Filter>
+    </ClInclude>
+    <ClInclude Include="MapObject.h">
+      <Filter>Заголовочные файлы\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="BlocksHeader.h">
+      <Filter>Заголовочные файлы\Map\Blocks</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

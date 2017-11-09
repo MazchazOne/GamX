@@ -5,22 +5,15 @@
 #include "Path.h"
 #include "Map.h"
 #include "Graph.h"
-#include "Point.h"
-//#include"GraphEdge.h"
 void main() 
 {	
-	//Map *zap = new Map();	//create map
+	StoneBlock::texture.loadFromFile("images/stone.png");
 	Map::GetMapfromFile();
-	////////TEST PATH
-	//Path pathTest;	
-	//pathTest.InitPMap(zap->map);
-	//
-	//std::cout << pathTest.fortest;
-	//////////TEST PATH
+	Map::CreateMapFromCharMap();	
 	Graph::LoadMap(Map::mapChar);	
 	int delay =1;														//time delay for next step
 	sf::RenderWindow window(
-		sf::VideoMode(width*blockSize, height*blockSize), "SFML works!");//create window
+	sf::VideoMode(width*blockSize, height*blockSize), "GameX");//create window
 	sf::Clock clock;														
 	Unit unit("images/sqad.png");										//create mainPerson
 	while (window.isOpen())										//Game loop/main loop
@@ -36,7 +29,6 @@ void main()
 		}
 
 
-////
 
 		if (event.type == sf::Event::MouseButtonPressed&&event.mouseButton.button == sf::Mouse::Right)//let coordinateRight click to current unit
 		{
@@ -50,14 +42,13 @@ void main()
 		unit.Step(time);					//here array with all units...they will do their step /// now just 1 unit
 		window.clear();		
 		/////////DRAW MAP//////// затоклнуть в метод карты...
+			
 		for (int j = 0; j < height; j++)
 		{
 			for (int i = 0; i < width; i++)				
-				if ( Map::GetElement(i + j*width)== '1')
+				if ( Map::mapChar[i + j*width]== blockChar)
 				{
-					static sf::RectangleShape Rectangle(sf::Vector2f(blockSize, blockSize));
-					Rectangle.setPosition(sf::Vector2f(i*blockSize, j*blockSize));
-					window.draw(Rectangle);
+					window.draw(Map::map[i + j*width]->GetSprite());
 				}
 		}
 		///////////////////////
@@ -66,7 +57,7 @@ void main()
 		circle1.setPosition(sf::Vector2f(unit.TargetPositionPoint.left, unit.TargetPositionPoint.top));	// draw current unit's target as red circle
 		circle1.setFillColor(sf::Color::Red);				//
 //		unit.Draw();
-		window.draw(circle1);						
+		window.draw(circle1);		
 		window.display();
 		window.clear();
 

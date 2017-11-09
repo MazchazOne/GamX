@@ -1,16 +1,11 @@
 #include "Unit.h"
-
 Unit::Unit(std::string pathForTexture)
 {
-	//unitImage.loadFromFile(pathForTexture);
 	unitTexture.loadFromFile(pathForTexture);
 	unitSprite.setTexture(unitTexture);
 	unitSprite.setPosition(0, 0);
 	ActualPositionRect = sf::FloatRect(0,0, 20, 20);
-	UnitCenter = sf::FloatRect(ActualPositionRect.left, ActualPositionRect.top, 1, 1);
-		//sf::FloatRect(ActualPositionRect.left + ActualPositionRect.width / 4,
-	//	ActualPositionRect.top + ActualPositionRect.height / 4,
-	//	/*ActualPositionRect.width/2*/1, /*ActualPositionRect.height/2*/1);
+	UnitCenter = sf::FloatRect(ActualPositionRect.left, ActualPositionRect.top, 1, 1);	
 	FolowingTarget = false;
 }
 //stack<int>Unit::GetPath() {}

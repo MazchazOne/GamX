@@ -1,22 +1,18 @@
 #include "Map.h"
 #include "constants.h"
 #include <fstream>
-#include<iostream>
+#include <iostream>
 #include <SFML/Graphics.hpp>
-//Map::map
 std::vector<MapCell*> Map::map = {};
 char Map::mapChar[width*height * 4] = {};
 char Map::GetElement(int index)
 {
 	return mapChar[index];
 }
-/*void Map::SetElement(int index, char value)
-{
-	map[index] = value;
-}*/// ›“Œ“ Œ“—“Œ… ”¡–¿“‹ » —ƒ≈À¿“‹ ÕŒ–Ã¿À‹Õ≈ Œ¡–¿Ÿ≈Õ»≈
 Map::Map(std::string name)
 {
 	GetMapfromFile(name);
+	CreateMapFromCharMap();
 }
 void Map::GetMapfromFile(std::string name )
 {
@@ -35,9 +31,13 @@ void Map::GetMapfromFile(std::string name )
 }
 void Map::CreateMapFromCharMap()
 {	
-	for (int i = 0; i < width*height * 4; i++) 
-	{
-		if (mapChar == "1")
-			map[i] = new MapCell(new StoneBlock(), i);
+	for (int i = 0; i < width*height; i++) 
+	{		
+		if (mapChar[i] == nothingChar)
+			map.push_back(new MapCell(new MapObject(), i));
+		if (mapChar[i] == blockChar)
+		{			
+			map.push_back(new MapCell(new StoneBlock(), i));
+		}
 	}
 }

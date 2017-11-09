@@ -1,14 +1,9 @@
 #include "StoneBlock.h"
-
-
-
+sf::Texture StoneBlock::texture;
 StoneBlock::StoneBlock()
-{
-	StoneBlock::texture.loadFromFile("images/stone.png");
-	StoneBlock::sprite.setTexture(texture);		
+{		
+	sprite.setTexture(this->texture);		
 }
-
-
 StoneBlock::~StoneBlock()
 {
 }

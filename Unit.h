@@ -12,22 +12,15 @@ public:
 		double currentWeidth;
 		std::vector<Object*> content;
 	};
-
-	sf::Texture unitTexture;
-	//sf::Image unitImage;
-	sf::Sprite unitSprite;
-	int pixelsSizeX = 20;//probably useles
-	int pixelsSizeY = 20;//probably useles
+	sf::Texture unitTexture;	
+	sf::Sprite unitSprite;	
 	sf::FloatRect TargetPositionPoint;
 	bool FolowingTarget = false;
 	sf::FloatRect ActualPositionRect;
 	sf::FloatRect UnitCenter;//средний 	
-	float currentFrame;
+	//float currentFrame;
 	float Dx = 0, Dy = 0;//set get 
-
-	Path path;//stack points fpr steps here
-
-	stack<int>GetPath();
+	Path path;//stack points fpr steps here	
 	
 	Unit(std::string pathForTexture);
 	void SetTarget(int x, int y); //Target for movement
